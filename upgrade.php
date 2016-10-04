@@ -1,43 +1,45 @@
 <?php
 /**
  *
- * @category        modules
- * @package         multilingual
- * @author          WebsiteBaker Project
- * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, Website Baker Org. e.V.
- * @link            http://www.websitebaker2.org/
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        WebsiteBaker 2.8.1
- * @requirements    PHP 5.1.0 and higher
- * @version         $Id:  $
- * @filesource        $HeadURL:  $
- * @lastmodified    $Date:  $
+ * @category       modules
+ * @package        mod_multilingual
+ * @authors        WebsiteBaker Project
+ * @copyright      WebsiteBaker Org. e.V.
+ * @link           http://websitebaker.org/
+ * @license        http://www.gnu.org/licenses/gpl.html
+ * @platform       WebsiteBaker 2.8.3
+ * @requirements   PHP 5.3.6 and higher
+ * @version        $Id:  $
+ * @filesource     $HeadURL:  $
+ * @lastmodified   $Date:  $
  *
  */
 
-// Must include code to stop this file being access directly
-if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
+/* -------------------------------------------------------- */
+// Must include code to stop this file being accessed directly
+if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__).'/'.basename(__FILE__).''); }
+/* -------------------------------------------------------- */
 
 include('lang.functions.php');
 
+$field_set = $database->field_add(TABLE_PREFIX.'pages', 'page_code', 'INT(11) NOT NULL AFTER `modified_by`');
+$field_set = $database->field_exists(TABLE_PREFIX.'pages', 'page_code');
 // Work-out if we should check for existing page_code
 $sql = 'DESCRIBE `'.TABLE_PREFIX.'pages` `page_code`';
 $field_sql = $database->query($sql);
-$field_set = $field_sql->numRows();
-// $field_set = $database->field_add('page_code', 'pages', 'INT(11) NOT NULL AFTER `modified_by`');
+//$field_set = $field_sql->numRows();
 
 // extract page_id from old format
 $pattern = '/(?<=_)([0-9]{1,11})/s';
 
-$format = $field_sql->fetchRow(MYSQL_ASSOC) ;
+$format = $field_sql->fetchRow(MYSQLI_ASSOC) ;
 
 // upgrade only if old format
 if($format['Type'] == 'varchar(255)' )
 {
     $sql = 'SELECT `page_code`,`page_id` FROM `'.TABLE_PREFIX.'pages` ORDER BY `page_id`';
     $query_code = $database->query($sql);
-    while( $page  = $query_code->fetchRow(MYSQL_ASSOC))
+    while( $page  = $query_code->fetchRow(MYSQLI_ASSOC))
     {
         preg_match($pattern, $page['page_code'], $array);
         $page_code = $array[0];
@@ -47,10 +49,10 @@ if($format['Type'] == 'varchar(255)' )
         $sql .= 'WHERE `page_id` = '.$page_id;
         $database->query($sql);
     }
-    $sql = 'ALTER TABLE `'.TABLE_PREFIX.'pages` MODIFY COLUMN `page_code` INT(11) NOT NULL DEFAULT 0 ';
+    $sql = 'ALTER TABLE `'.TABLE_PREFIX.'pages` MODIFY COLUMN `page_code` INT(11) NOT NULL DEFAULT \'0\' ';
     $database->query($sql);
 } else {
-    $sql = 'ALTER TABLE `'.TABLE_PREFIX.'pages` MODIFY COLUMN `page_code` INT(11) NOT NULL DEFAULT 0 ';
+    $sql = 'ALTER TABLE `'.TABLE_PREFIX.'pages` MODIFY COLUMN `page_code` INT(11) NOT NULL DEFAULT \'0\' ';
     $database->query($sql);
     $entries = array();
     $entries = get_page_list( 0 );

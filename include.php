@@ -17,50 +17,62 @@
  *
  * LICENSE: GNU General Public License 3.0
  *
- * @author        Dietmar Wöllbrink
+ * @author       Dietmar Wöllbrink
  * @copyright    Dietmar Wöllbrink (c) 2009 - 2011
- * @license        http://www.gnu.org/licenses/gpl.html
- * @version        0.1.0
- * @platform    Website Baker 2.8.x
+ * @license      http://www.gnu.org/licenses/gpl.html
+ * @version      0.1.0
+ * @platform     Website Baker 2.8.x
  *
  * <?php if(function_exists('language_menu')) { language_menu(); } ?>
- * 
+ *
  */
 
-// prevent this file from being accessed directly
-if (!defined('WB_PATH')) { die( header('Location: ../../index.php')); }
 
-if(!function_exists('language_menu'))
-{
-    function language_menu($ext='gif')
+/* -------------------------------------------------------- */
+// Must include code to stop this file being accessed directly
+if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__).'/'.basename(__FILE__).''); }
+/* -------------------------------------------------------- */
+
+    $languageMenu = function ($sExt, $printOutput) use($database)
     {
-        global $database;
-        $retVal = false;
-        $mod_path = str_replace('\\', '/', dirname(__FILE__));
-        $mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
-        $mod_name = basename($mod_path);
-        include_once('lang.functions.php');
+        $retVal = '';
+        if ($iArgs=func_num_args()){
+            $aArgs = func_get_args();
+            foreach ($aArgs as $key => $value){
+                if (is_string($value)){$sExt=$value; $aArgs['ext']=$sExt;}
+                if (is_bool($value)){$printOutput=$value; $aArgs['print']=$printOutput;}
+            }
+        }
+        if (!isset($sExt)){$sExt='gif'; $aArgs['ext']=$sExt;}
+        if (!isset($printOutput)){$printOutput=true; $aArgs['print']=$printOutput;}
+        $sAddonPath = str_replace('\\', '/', __DIR__);
+        include('lang.functions.php');
+        $sAddonName = basename($sAddonPath);
         // Work-out we should check for existing page_code
         $field_set = $database->field_exists(TABLE_PREFIX.'pages', 'page_code');
         if (defined('PAGE_LANGUAGES') && (PAGE_LANGUAGES==true) && ($field_set==true))
         {
-            include(get_module_language_file($mod_name));
+//            get_module_language_file($sAddonName);
+            $oTrans = Translate::getInstance();
             $langIcons  = array();
-            print '<div id="langmenu">'.PHP_EOL;
-            $langIcons = set_language_icon(PAGE_ID,$ext );
-
+            $langIcons = set_language_icon(PAGE_ID,$sExt );
             if( sizeof($langIcons) > 1 )
             {
-                $retVal = true;
+                $retVal = '<div id="langmenu">'.PHP_EOL;
                 foreach( $langIcons as $key=>$value )
                 {
-                    print $value;
+                    $retVal .= $value;
                 }
+                $retVal .= '</div>';
             }
         }
-        print '</div>'.PHP_EOL;
-        return $retVal;
-    }
-    return false;
-}
+        if ($printOutput){ echo $retVal."<!-- echo -->\n";}else{return $retVal."<!-- buffer -->\n";}
+    };
 //
+
+/**
+ */
+     function language_menu($sExt='gif', $printOutput=true) {
+       global $database, $languageMenu;
+       return $languageMenu($sExt, $printOutput);
+     }

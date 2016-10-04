@@ -1,18 +1,17 @@
 <?php
 /**
  *
- * @category        modules
- * @package         multilingual
- * @author          WebsiteBaker Project
- * @copyright       2004-2009, Ryan Djurovich
- * @copyright       2009-2010, WebsiteBaker Org. e.V.
- * @link            http://websitebaker.org/
- * @license         http://www.gnu.org/licenses/gpl.html
- * @platform        WebsiteBaker 2.8.1
- * @requirements    PHP 5.1.0 and higher
- * @version         $Id:  $
- * @filesource      $HeadURL:  $
- * @lastmodified    $Date:  $
+ * @category       modules
+ * @package        mod_multilingual
+ * @authors        WebsiteBaker Project
+ * @copyright      WebsiteBaker Org. e.V.
+ * @link           http://websitebaker.org/
+ * @license        http://www.gnu.org/licenses/gpl.html
+ * @platform       WebsiteBaker 2.8.3
+ * @requirements   PHP 5.3.6 and higher
+ * @version        $Id:  $
+ * @filesource     $HeadURL:  $
+ * @lastmodified   $Date:  $
  *
  */
 

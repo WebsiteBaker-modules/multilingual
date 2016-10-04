@@ -1,19 +1,23 @@
 This snippet switches between different languages
 
-To execute Multilingual you have to 
+To execute Multilingual you have to
 1) Enable Page Languages
 2) Page Level Limit higher 1 (folder level)
-3) Required template modifications
+3) Required template modifications you can show gif or png flags
     <?php if(function_exists('language_menu')) { language_menu('gif|png'); } ?>
-    
-    you can show gif or png flags
+    <?php $iMultiLang = 0; if (function_exists('language_menu')) { language_menu('gif|png'); $iMultiLang = 1;} ?>
+    with the variable $iMultiLang you show menu items from the top or child level
+    <?php show_menu2(0, SM2_ROOT+$iMultiLang, SM2_START); ?>
+
     following container will be created, style it with your template css
     <div id="langmenu">
-    <a title="Deutsch" href="/pages/de/startseite.php" class="current">
-    <span><img title="Deutsch" alt="Deutsch" src="/modules/mod_multilingual/flags/de.gif"></span></a>
-    <a title="English" href="/pages/en/home.php" class="default">
-    <span><img title="English" alt="English" src="/modules/mod_multilingual/flags/en.gif"></span></a>
+        <a title="Deutsch" href="/pages/de/startseite.php" class="current">
+        <span><img title="Deutsch" alt="Deutsch" src="/modules/mod_multilingual/flags/de.gif"></span></a>
+        <a title="English" href="/pages/en/home.php" class="default">
+        <span><img title="English" alt="English" src="/modules/mod_multilingual/flags/en.gif"></span></a>
     </div>
+    Now it's possible to get the langmenu container as string.
+    Set a second parameter "false" to function language_menu
 
 4) Setting up the page structure
    http://help.websitebaker.org/en/help/designerguide/multilingualwebsites.php

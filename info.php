@@ -1,28 +1,33 @@
 <?php
-
 /**
-  Module developed for the Open Source Content Management System Website Baker (http://websitebaker.org)
-  Copyright (C) 2009-2010, Dietmar W&ouml;llbrink
-  Contact me: info@wdsnet.de, http://www.wdsnet.de
+ *
+ * @category       modules
+ * @package        mod_multilingual
+ * @authors        WebsiteBaker Project
+ * @copyright      WebsiteBaker Org. e.V.
+ * @link           http://websitebaker.org/
+ * @license        http://www.gnu.org/licenses/gpl.html
+ * @platform       WebsiteBaker 2.8.3
+ * @requirements   PHP 5.3.6 and higher
+ * @version        $Id:  $
+ * @filesource     $HeadURL:  $
+ * @lastmodified   $Date:  $
+ *
+ */
 
-  This module is free software. You can redistribute it and/or modify it
-  under the terms of the GNU General Public License  - version 2 or later,
-  as published by the Free Software Foundation: http://www.gnu.org/licenses/gpl.html.
-
-  This module is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-**/
+/* -------------------------------------------------------- */
+// Must include code to stop this file being accessed directly
+if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__).'/'.basename(__FILE__).''); }
+/* -------------------------------------------------------- */
 
 $module_directory = 'mod_multilingual';
-$module_name = 'Multilingual Switcher 1.6.6';
+$module_name = 'Multilingual Switcher v1.7.0';
 $module_function = 'snippet';
-$module_version = '1.6.6-dev';
-$module_status	= 'alpha';
-$module_platform = '2.8.2';
+$module_version = '1.7.0';
+$module_status    = 'stable';
+$module_platform = '2.8.3 SP6';
 $module_author = 'Luisehahne';
 $module_license = 'GNU General Public License';
-$module_requirements = 'min. PHP 5.2.2 and WB 2.8.2 or higher)';
+$module_requirements = 'min. PHP 5.3.6 and WB 2.8.3';
 $module_description = 'This snippet switches between different languages';
 
