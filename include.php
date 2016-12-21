@@ -66,7 +66,8 @@ if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__)
                 $retVal .= '</div>';
             }
         }
-        if ($printOutput){ echo $retVal."<!-- echo -->\n";}else{return $retVal."<!-- buffer -->\n";}
+        if ($printOutput){ echo $retVal."<!-- echo -->\n";}else{$retVal .= "<!-- buffer -->\n";}
+        return $retVal;
     };
 //
 
