@@ -53,7 +53,9 @@ if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__)
         if (defined('PAGE_LANGUAGES') && (PAGE_LANGUAGES==true) && ($field_set==true))
         {
 //            get_module_language_file($sAddonName);
-            $oTrans = Translate::getInstance();
+            if (is_readable(WB_PATH.'/framework/Translate')){
+                $oTrans = Translate::getInstance();
+            }
             $langIcons  = array();
             $langIcons = set_language_icon(PAGE_ID,$sExt );
             if( sizeof($langIcons) > 1 )

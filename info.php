@@ -21,9 +21,9 @@ if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__)
 /* -------------------------------------------------------- */
 
 $module_directory = 'mod_multilingual';
-$module_name = 'Multilingual Switcher v1.7.3';
+$module_name = 'Multilingual Switcher v1.7.4';
 $module_function = 'snippet';
-$module_version = '1.7.3';
+$module_version = '1.7.4';
 $module_status    = 'stable';
 $module_platform = '2.8.3 SP6';
 $module_author = 'Luisehahne';
