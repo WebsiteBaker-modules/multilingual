@@ -1,38 +1,46 @@
 <?php
-
-// $Id$
-
 /*
+ * Copyright (C) 2017 Manuela v.d.Decken <manuela@isteam.de>
+ *
+ * DO NOT ALTER OR REMOVE COPYRIGHT OR THIS HEADER
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License 2 for more details.
+ *
+ * You should have received a copy of the GNU General Public License 2
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Description of NL
+ * @package      AddonTranslation
+ * @copyright    Manuela v.d.Decken <manuela@isteam.de>
+ * @author       Manuela v.d.Decken <manuela@isteam.de>
+ * @license      GNU General Public License 2.0
+ * @version      4.0.0
+ * @revision     $Id: $
+ * @since        File available since 18.10.2017
+ * @deprecated   no
+ * @description  xxx
+ */
+//declare(strict_types = 1);
+//declare(encoding = 'UTF-8');
 
-Website Baker Project <http://www.websitebaker.org/>
-Copyright (C) 2004-2009, Ryan Djurovich
+if (!defined('WB_PATH')) { header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found'); flush(); exit; }
 
-Website Baker is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-Website Baker is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Website Baker; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
 // Set the language information
 $language_code = 'NL';
 $language_name = 'Nederlands';
-$language_version = '2.8';
-$language_platform = '2.8.x';
-$language_author = 'Stefan Braunewell, Matthias Gallas';
-$language_license = 'GNU General Public License';
+$language_version = '4.0.0';
+$language_platform = '2.11.0';
+$language_author = 'Manuela v.d.Decken, Dietmar Wöllbrink';
+$language_license = 'GNU General Public License 2.0';
 
 $MENU['LANG_PAGES'] = 'Taal Pages';
 $LANG['NL'] = 'Nederlands';
-$MESSAGE['PAGES']['UPDATE_SETTINGS'] = 'Tags zijn bijgewerkt ';
-
-
-?>
+$MESSAGE['PAGES_UPDATE_SETTINGS'] = 'Tags zijn bijgewerkt ';

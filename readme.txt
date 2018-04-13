@@ -1,35 +1,25 @@
-This snippet switches between different languages
+#
+#
+How to use MultiLingual
+##########################################################################
+The easiest way is the combination with Droplet [[iMultiLingual]]
 
-To execute Multilingual you have to
-1) Enable Page Languages
-2) Page Level Limit higher 1 (folder level)
-3) Required template modifications you can show gif or png flags
-    <?php if(function_exists('language_menu')) { language_menu('gif|png'); } ?>
-    <?php $iMultiLang = 0; if (function_exists('language_menu')) { language_menu('gif|png'); $iMultiLang = 1;} ?>
-    with the variable $iMultiLang you show menu items from the top or child level
-    <?php show_menu2(0, SM2_ROOT+$iMultiLang, SM2_START); ?>
+##########################################################################
+but you also can handle it in the  old manner:
 
-    following container will be created, style it with your template css
-    <div id="langmenu">
-        <a title="Deutsch" href="/pages/de/startseite.php" class="current">
-        <span><img title="Deutsch" alt="Deutsch" src="/modules/mod_multilingual/flags/de.gif"></span></a>
-        <a title="English" href="/pages/en/home.php" class="default">
-        <span><img title="English" alt="English" src="/modules/mod_multilingual/flags/en.gif"></span></a>
-    </div>
-    Now it's possible to get the langmenu container as string.
-    Set a second parameter "false" to function language_menu
+insert the following PHP-code in your templates index.php in the place you want
+show the languages link bar.
 
-4) Setting up the page structure
-   http://help.websitebaker.org/en/help/designerguide/multilingualwebsites.php
+<?php $iMultiLang = 0; if (function_exists('language_menu')) { $sMultiLang = language_menu('png'); $iMultiLang = (int)((!empty($sMultiLang))?1:0);} ?>
 
-   Language selection via the intro page no more needed
+the var $iMultiLang set the show_menu2 startlevel
+e.g.
+<?php
+echo show_menu2(SM2_ALLMENU, SM2_ROOT+$iMultiLang, SM2_CURR+1, SM2_ALL|SM2_BUFFER|SM2_PRETTY|SM2_NUMCLASS,'<li><span class="menu-default">[ac][menu_title]</a></span>','</li>','<ul>','</ul>');
+?>
 
-5) After installing the Multilingual modul
-   In Modify Page Settings you find an extra field Pagecode with a directory listing with pages from default languages.
-   The folder level is limited by the value from Page Level Limit
-
-   a) Create your pages for the default language
-   b) Create your pages for the 2nd language
-   c) select a page in the 2nd language area and call Modify Page Settings
-   d) in field Pagecode select the default language page and save
+##########################################################################
+If you wish to modify the template, just open the file
+ /modules/MultiLingual/tpl/lang.html.twig
+and make your modifications.
 

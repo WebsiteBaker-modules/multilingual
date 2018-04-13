@@ -1,59 +1,42 @@
 <?php
 /**
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * @category       modules
- * @package        mod_multilingual
- * @authors        WebsiteBaker Project
- * @copyright      WebsiteBaker Org. e.V.
- * @link           http://websitebaker.org/
- * @license        http://www.gnu.org/licenses/gpl.html
- * @platform       WebsiteBaker 2.8.3
- * @requirements   PHP 5.3.6 and higher
- * @version        $Id:  $
- * @filesource     $HeadURL:  $
- * @lastmodified   $Date:  $
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * install.php
+ *
+ * @category     Modules
+ * @package      Modules_MultiLingual
+ * @author       Werner v.d.Decken <wkl@isteam.de>
+ * @author       Dietmar Wöllbrink <dietmar.woellbrink@websiteBaker.org>
+ * @copyright    Werner v.d.Decken <wkl@isteam.de>
+ * @license      http://www.gnu.org/licenses/gpl.html   GPL License
+ * @version      1.6.8
+ * @revision     $Revision: 2070 $
+ * @link         $HeadURL: svn://isteam.dynxs.de/wb_svn/wb280/branches/2.8.x/wb/modules/MultiLingual/install.php $
+ * @lastmodified $Date: 2014-01-03 02:21:42 +0100 (Fr, 03. Jan 2014) $
+ * @since        File available since 09.01.2013
+ * @description  xyz
  */
 
 /* -------------------------------------------------------- */
-// Must include code to stop this file being accessed directly
-if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__).'/'.basename(__FILE__).''); }
+// Must include code to prevent this file from being accessed directly
+if (!defined('SYSTEM_RUN')) { header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found'); flush(); exit; }
 /* -------------------------------------------------------- */
-
-$mod_path = dirname(__FILE__);
-$mod_rel = str_replace($_SERVER['DOCUMENT_ROOT'],'',str_replace('\\', '/', $mod_path ));
-$mod_name = basename($mod_path);
-include('lang.functions.php');
-include(get_module_language_file($mod_name));
-$aMsgQueue = array();
-// this function checks the basic configurations of an existing WB intallation
-function status_msg($message, $class='check', $element='span') {
-    // returns a status message
-    return '<'.$element .' class="' .$class .'">' .$message .'</' .$element.'>';
-}
-
-/**********************************************************
- *  - Add field "page_code" to table "pages"
- */
-
-$aMsgQueue[] = '<h3>Step 1: Updating database pages entrie</h3>';
-$database->field_add( TABLE_PREFIX.'pages', 'page_code','INT(11) NOT NULL DEFAULT \'0\' AFTER `modified_by`');
-$aMsgQueue[] = '<h3>Step 2: Updating field page_code with page_id by default language</h3>';
-$lang_array = get_page_languages(); // check for page languages
-
-if(count($lang_array))
-{
-            $entries = array();
-            $entries = get_page_list( 0 );
-           // fill page_code with $page_id for default_language
-              while( list( $page_id, $val ) = each ( $entries ) )
-                {
-                  if( $val['language'] == DEFAULT_LANGUAGE )
-                  {
-                      db_update_field_entry($page_id, 'pages', (int)$page_id );
-                  }
-              }
-}
-
-// Print admin footer
-// $admin->print_footer();
+    if (version_compare(WB_VERSION, '2.10.0', '<=')){
+        throw new Exception ('It is not possible to install from WebsiteBaker Versions before 2.10.0');
+    }
